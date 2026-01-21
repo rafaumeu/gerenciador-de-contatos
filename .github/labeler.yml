@@ -1,0 +1,32 @@
+# Area Labels
+ui:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "views/**"
+          - "public/**/*.css"
+          - "public/**/*.js"
+
+core:
+  - changed-files:
+      - any-glob-to-any-file: "src/**"
+
+database:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "src/Database/**"
+          - "*.sqlite"
+
+# Type Labels
+docs:
+  - changed-files:
+      - any-glob-to-any-file: "**/*.md"
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file: ".github/**"
+
+config:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "composer.json"
+          - "pint.json"
