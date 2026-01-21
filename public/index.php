@@ -2,5 +2,6 @@
 
 declare(strict_types=1);
 
-// Entry point placeholder
-echo 'Hello from Public';
+require __DIR__.'/../vendor/autoload.php';
+
+require __DIR__.'/../config/route.php';
