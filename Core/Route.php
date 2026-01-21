@@ -21,11 +21,13 @@ class Route
     public function dispatch(string $uri, string $method): void
     {
         if (array_key_exists($uri, $this->routes[$method])) {
-            $controller = $this->routes[$method][$uri];
-            echo 'Achei a rota! Controller: '.$controller;
+            $action = $this->routes[$method][$uri];
+            [$controllerClass,$methodName] = explode('@', $action);
+            $controller = new $controllerClass;
+            $controller->$methodName();
         } else {
             http_response_code(404);
-            echo 'Rota não encontrada!';
+            echo '404 - Rota não encontrada!';
         }
     }
 }

@@ -10,7 +10,7 @@ class Request
     {
         $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-        return trim($uri, '/');
+        return '/'.trim($uri, '/');
     }
 
     public function method(): string
