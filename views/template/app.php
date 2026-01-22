@@ -23,9 +23,8 @@ function getLinkClasses($rota, $uriAtual): string
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
   <title>Gerenciador de Contatos</title>
-  <!-- Alpine.js -->
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -41,6 +40,8 @@ function getLinkClasses($rota, $uriAtual): string
             'text-xsmall': ['10px', '14px'],
             'label-medium': ['14px', '22px'],
             'label-small': ['12px', '20px'],
+            'modal-heading': ['20px', '28px'],
+            'icon': ['16px']
           },
           colors: {
             background: {
@@ -86,6 +87,15 @@ function getLinkClasses($rota, $uriAtual): string
       },
     }
   </script>
+  <style>
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
 </head>
 
 <body class="min-h-screen bg-background-primary font-sans text-base-content flex flex-row antialiased">
