@@ -8,6 +8,7 @@ class HomeController extends Controller
 {
     public function index(): void
     {
-        $this->view('home', ['nome' => 'Rafael Zendron']);
+        $letra = $_GET['letra'] ?? '#';
+        $this->view('home', ['letraSelecionada' => $letra]);
     }
 }

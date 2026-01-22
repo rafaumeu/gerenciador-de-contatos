@@ -8,18 +8,10 @@ abstract class Controller
 {
     /**
      * @param  string  $viewPath  Nome do arquivo (ex: 'home' ou 'contatos/index')
-     * @param  array  $data  o arrau de dados (ex: ['titulo' => 'Contatos'])
+     * @param  array  $data  o array de dados (ex: ['titulo' => 'Contatos'])
      */
-    protected function view(string $viewPath, array $data = []): void
+    protected function view(string $viewPath, array $data = [], string $layoutPath = 'template/app'): void
     {
-        extract($data);
-        $filename = __DIR__."/../views/{$viewPath}.view.php";
-
-        if (file_exists($filename)) {
-            require $filename;
-        } else {
-            http_response_code(404);
-            echo "Erro: View '{$viewPath}' não encontrada.";
-        }
+        View::render($viewPath, $data, $layoutPath);
     }
 }
