@@ -10,16 +10,23 @@ abstract class Controller
      * @param  string  $viewPath  Nome do arquivo (ex: 'home' ou 'contatos/index')
      * @param  array  $data  o arrau de dados (ex: ['titulo' => 'Contatos'])
      */
-    protected function view(string $viewPath, array $data = []): void
+    protected function view(string $viewPath, array $data = [], string $layoutPath = 'template/app'): void
     {
         extract($data);
-        $filename = __DIR__."/../views/{$viewPath}.view.php";
+        $viewFile = __DIR__."/../views/{$viewPath}.view.php";
+        $layoutFile = __DIR__."/../views/{$layoutPath}.php";
 
-        if (file_exists($filename)) {
-            require $filename;
-        } else {
+        if (! file_exists($layoutFile)) {
             http_response_code(404);
-            echo "Erro: View '{$viewPath}' não encontrada.";
+            echo "Erro: Layout '{$layoutPath}' não encontrado.";
+
+            return;
         }
+        ob_start();
+        require $viewFile;
+        $content = ob_get_clean();
+
+        require $layoutFile;
+
     }
 }
