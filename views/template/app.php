@@ -24,6 +24,8 @@ function getLinkClasses($rota, $uriAtual): string
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <title>Gerenciador de Contatos</title>
+  <!-- Alpine.js -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
   <script>
     tailwind.config = {
       theme: {
