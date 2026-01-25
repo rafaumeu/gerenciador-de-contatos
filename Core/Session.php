@@ -72,4 +72,9 @@ class Session
 
         return null;
     }
+
+    public static function remove(string $key): void
+    {
+        self::forget($key);
+    }
 }

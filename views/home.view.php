@@ -11,15 +11,22 @@
       </form>
     </div>
     <div class="flex gap-3">
-      <button onclick="document.getElementById('add_contact_modal').showModal()"
+      <button onclick="openPasswordContactModal()"
         class="flex items-center gap-[4px] p-[12px] bg-background-tertiary text-content-primary font-bold rounded-lg text-sm hover:brightness-110 transition-all">
         <span class="material-symbols-rounded text-lg">add</span>
         Adicionar contato
       </button>
-      <button onclick="document.getElementById('password_contact_modal').showModal()"
-        class="p-[12px] border border-primary rounded-xl">
-        <span class="material-symbols-rounded text-lg text-content-primary">lock</span>
-      </button>
+      <?php if ($unlocked) { ?>
+        <button onclick="lockData()"
+          class="flex items-center gap-[4px] p-[12px] bg-background-tertiary text-content-primary font-bold rounded-lg text-sm hover:brightness-110 transition-all">
+          <span class="material-symbols-rounded text-lg">lock</span>
+        </button>
+      <?php } else { ?>
+        <button onclick="openPasswordContactModal()"
+          class="flex items-center gap-[4px] p-[12px] bg-background-tertiary text-content-primary font-bold rounded-lg text-sm hover:brightness-110 transition-all">
+          <span class="material-symbols-rounded text-lg">lock_open</span>
+        </button>
+      <?php } ?>
     </div>
   </div>
 
@@ -56,6 +63,14 @@
             </h3>
             <table class="w-full text-left border-collapse">
               <tbody class="divide-y divide-border-primary/50">
+                <thead>
+                  <tr>
+                    <th class="py-4 pl-4 text-content-body/40 text-text-medium uppercase flex items-center gap-3 w-[40%]">Nome</th>
+                    <th class="py-4 text-content-body/40 text-text-medium uppercase w-[30%] select-none tracking-widest">Email</th>
+                    <th class="py-4 text-content-body/40 text-text-medium uppercase w-[20%] select-none tracking-widest">Telefone</th>
+                    <th class="py-4 pr-4 text-right"></th>
+                  </tr>
+                </thead>
                 <?php foreach ($list as $contact) { ?>
                   <tr class="group hover:bg-background-tertiary transition-colors">
                     <td class="py-4 pl-4 flex items-center gap-3 w-[40%]">
@@ -69,8 +84,20 @@
                       </div>
                       <span class="text-content-body font-text-medium"><?= $contact['name'] ?></span>
                     </td>
-                    <td class="py-4 text-content-body text-text-medium w-[30%]"><?= $contact['email'] ?></td>
-                    <td class="py-4 text-content-body text-text-medium w-[20%]"><?= $contact['phone'] ?></td>
+                    <td class="py-4 text-content-body text-text-medium w-[30%] select-none tracking-widest">
+                      <?php if ($unlocked ?? false) { ?>
+                        <?= $contact['email'] ?>
+                      <?php } else { ?>
+                        ••••••••••••
+                      <?php } ?>
+                    </td>
+                    <td class="py-4 text-content-body text-text-medium w-[20%] select-none tracking-widest">
+                      <?php if ($unlocked ?? false) { ?>
+                        <?= $contact['phone'] ?>
+                      <?php } else { ?>
+                        ••••••••••••
+                      <?php } ?>
+                    </td>
                     <td class="py-4 pr-4 text-right">
                       <div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                         <button onclick='openModal(<?= json_encode($contact) ?>)'
@@ -81,10 +108,17 @@
                           class="p-2 hover:bg-accent-brand/20 rounded-lg text-content-primary hover:text-accent-brand transition-colors">
                           <span class="material-symbols-rounded text-icon">delete</span>
                         </button>
+                        <?php if ($unlocked ?? false) { ?>
                         <button onclick="document.getElementById('password_contact_modal').showModal()"
                           class="p-2 hover:bg-accent-brand/20 rounded-lg text-content-primary hover:text-accent-brand transition-colors">
                           <span class="material-symbols-rounded text-icon">lock</span>
                         </button>
+                        <?php } else { ?>
+                        <button onclick="document.getElementById('password_contact_modal').showModal()"
+                          class="p-2 hover:bg-accent-brand/20 rounded-lg text-content-primary hover:text-accent-brand transition-colors">
+                          <span class="material-symbols-rounded text-icon">lock_open</span>
+                        </button>
+                        <?php } ?>
                       </div>
                     </td>
                   </tr>
@@ -112,17 +146,18 @@
     document.getElementById('edit_name').value = contact.name;
     document.getElementById('edit_email').value = contact.email;
     document.getElementById('edit_phone').value = contact.phone;
+    
     const preview = document.getElementById('edit_preview');
     const icon = document.getElementById('edit_icon');
-    if(preview && icon) {
+    if (preview && icon) {
       preview.classList.add('hidden');
       icon.classList.remove('hidden');
     }
-    if(contact.image_path && contact.image_path !== 'default.png') {
-      if(preview && icon) {
+    if (contact.image_path && contact.image_path !== 'default.png') {
+      if (preview && icon) {
         icon.classList.add('hidden');
         preview.classList.remove('hidden');
-        preview.src = '/public/' + contact.image_path;
+        preview.src = '/' + contact.image_path;
       }
     }
     const delInput = document.getElementById('delete_id_input');
@@ -144,14 +179,25 @@
     }
   }
   function updateImagePreview(input, imgId, iconId) {
-    if(input.files && input.files[0]) {
+    if (input.files && input.files[0]) {
       const reader = new FileReader();
-      reader.onload = function(e) {
-          document.getElementById(imgId).src = e.target.result;
-          document.getElementById(imgId).classList.remove('hidden');
-          document.getElementById(iconId).classList.add('hidden');
+      reader.onload = function (e) {
+        document.getElementById(imgId).src = e.target.result;
+        document.getElementById(imgId).classList.remove('hidden');
+        document.getElementById(iconId).classList.add('hidden');
       }
       reader.readAsDataURL(input.files[0]);
     }
+  }
+  function openPasswordContactModal(id = null) {
+    document.getElementById('decrypt_contact_id').value = id || '';
+    document.getElementById('password_contact_modal').showModal();
+  }
+  function lockData(){
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '/contatos/lock';
+    document.body.appendChild(form);
+    form.submit();
   }
 </script>

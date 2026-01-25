@@ -11,7 +11,9 @@
 
 - **📇 Contact Operations**: Create, Read, Update, and Delete (CRUD) contacts easily.
 - **🔍 Modern Search**: Quickly find contacts by name or email.
-- **🛡️ Secure & Clean**: Built with PSR-12 standards and secure coding practices.
+- **🔐 Military-Grade Security**: AES-256 encryption for sensitive data (Email & Phone).
+- **👁️ Privacy Mode**: Blur/Hide sensitive info by default with password unlock.
+- **🛡️ Robust Auth**: Middleware protection, Session management & Secure Logout.
 - **🤖 Automated**: Full CI/CD pipeline for code quality ensuring every commit is pristine.
 
 ## 🚀 Getting Started

@@ -3,8 +3,11 @@
 namespace App\Controllers;
 
 use App\Models\Contact;
+use App\Models\User;
 use Core\Controller;
+use Core\Encryption;
 use Core\Request;
+use Core\Session;
 
 class ContactController extends Controller
 {
@@ -42,8 +45,8 @@ class ContactController extends Controller
         $contact = new Contact;
         $contact->create([
             'name' => $data['name'],
-            'email' => $data['email'],
-            'phone' => $data['phone'],
+            'email' => Encryption::encrypt($data['email']),
+            'phone' => Encryption::encrypt($data['phone']),
             'image_path' => $imagePath,
         ]);
 
@@ -57,8 +60,8 @@ class ContactController extends Controller
         $contact = new Contact;
         $updateData = [
             'name' => $data['name'],
-            'email' => $data['email'],
-            'phone' => $data['phone'],
+            'email' => Encryption::encrypt($data['email']),
+            'phone' => Encryption::encrypt($data['phone']),
         ];
         if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
             $uploadDir = __DIR__.'/../../public/uploads';
@@ -82,6 +85,31 @@ class ContactController extends Controller
         $id = (int) $data['id'];
         $contact = new Contact;
         $contact->delete($id);
+        redirect('/');
+    }
+
+    public function decrypt(): void
+    {
+        $password = $_POST['password'] ?? '';
+        $userSession = Session::get('user');
+        if (! $userSession) {
+            redirect('/login');
+        }
+        $userModel = new User;
+        $user = $userModel->findByEmail($userSession['email']);
+        if ($user && password_verify($password, $user['password'])) {
+            Session::put('unlock_data', true);
+            flash('success', 'Senha correta! Dados liberados');
+            redirect('/');
+        }
+        flash('error', 'Senha incorreta! Dados bloqueados');
+        redirect('/');
+    }
+
+    public function lock(): void
+    {
+        Session::forget('unlock_data');
+        flash('success', 'Dados bloqueados com segurança!');
         redirect('/');
     }
 }

@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Models\Contact;
 use Core\Controller;
+use Core\Encryption;
+use Core\Session;
 
 class HomeController extends Controller
 {
@@ -11,6 +13,14 @@ class HomeController extends Controller
     {
         $contactModel = new Contact;
         $contacts = $contactModel->all();
+        $unlocked = Session::get('unlock_data') ?? false;
+        foreach ($contacts as &$contact) {
+            if ($unlocked) {
+                $contact['email'] = Encryption::decrypt($contact['email'] ?? $contact['email']);
+                $contact['phone'] = Encryption::decrypt($contact['phone'] ?? $contact['phone']);
+            }
+        }
+        unset($contact);
         $search = $_GET['search'] ?? '';
         if (! empty($search)) {
             $contacts = array_filter($contacts, function ($contact) use ($search) {
@@ -29,6 +39,7 @@ class HomeController extends Controller
         $this->view('home', [
             'letraSelecionada' => $letra,
             'contacts' => $groupedContacts,
+            'unlocked' => $unlocked,
         ]);
     }
 }
