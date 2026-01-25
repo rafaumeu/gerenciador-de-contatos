@@ -5,49 +5,54 @@
         <div class="flex-1">
           <h3 class="flex items-center font-bold text-modal-heading text-content-primary ">Editar contato</h3>
         </div>
-        <button class="flex items-center justify-center text-content-muted hover:text-content-primary p-2 rounded-lg transition-colors">
+        <button
+          class="flex items-center justify-center text-content-muted hover:text-content-primary p-2 rounded-lg transition-colors">
           <span class="material-symbols-rounded">close</span>
         </button>
       </form>
     </div>
-    <div class="flex flex-col p-[20px]">
-      <div class="p-[20px] flex flex-col items-center justify-center">
-        <div
-          class="flex items-center p-[8px] mb-[12px] justify-center w-[64px] h-[64px] rounded-xl bg-background-secondary">
-          <span class="material-symbols-rounded text-4xl text-content-muted">account_circle</span>
+    <form action="/contatos/update" method="POST" id="edit_contact_form" enctype="multipart/form-data">
+      <div class="flex flex-col p-[20px]">
+        <div class="p-[20px] flex flex-col items-center justify-center">
+          <div
+            class="flex items-center p-[8px] mb-[12px] justify-center w-[64px] h-[64px] rounded-xl bg-background-secondary">
+            <img src="" alt="" id="edit_preview" class="w-full h-full object-cover hidden">
+            <span id="edit_icon" class="material-symbols-rounded text-4xl text-content-muted">account_circle</span>
+          </div>
+          <input type="file" name="image" id="edit_image_input" class="hidden" accept="image/*" onchange="updateImagePreview(this, 'edit_preview', 'edit_icon')">
+          <button type="button" onclick="document.getElementById('edit_image_input').click()"
+            class="flex items-center gap-[4px] text-content-primary text-text-small hover:text-content-primary p-[8px] rounded-lg transition-colors border border-border-primary">
+            <span class="material-symbols-rounded text-icon">upload</span>
+            Substituir
+          </button>
         </div>
+        <div class="flex flex-col gap-[16px]">
+          <input type="hidden" name="id" id="edit_id">
+          <div class="flex flex-col gap-[4px]">
+            <label for="name" class="text-content-primary text-text-small">Nome</label>
+            <input type="text" placeholder="Nome" id="edit_name" name="name"
+              class="w-full bg-background-secondary placeholder:text-content-placeholder p-[12px] border border-primary rounded-lg focus:border-accent-brand outline-none transition-all">
+          </div>
+          <div class="flex flex-col gap-[4px]">
+            <label for="email" class="text-content-primary text-text-small">E-mail</label>
+            <input type="text" placeholder="E-mail" id="edit_email" name="email"
+              class="w-full bg-background-secondary placeholder:text-content-placeholder p-[12px] border border-primary rounded-lg focus:border-accent-brand outline-none transition-all">
+          </div>
+          <div class="flex flex-col gap-[4px]">
+            <label for="phone" class="text-content-primary text-text-small">Telefone</label>
+            <input type="text" placeholder="Telefone" id="edit_phone" name="phone"
+              class="w-full mb-[20px] bg-background-secondary placeholder:text-content-placeholder p-[12px] border border-primary rounded-lg focus:border-accent-brand outline-none transition-all">
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-border-primary"></div>
+      <div class="flex justify-end pt-[12px] mr-[0px] gap-[12px]">
+        <button type="button" onclick="document.getElementById('edit_contact_modal').close()"
+          class="text-content-primary bg-background-tertiary text-text-small hover:text-content-primary p-[12px] rounded-lg transition-colors border border-border-primary">Cancelar</button>
         <button
-          class="flex items-center gap-[4px] text-content-primary text-text-small hover:text-content-primary p-[8px] rounded-lg transition-colors border border-border-primary">
-          <span class="material-symbols-rounded text-icon">upload</span>
-          Substituir
-        </button>
+          class="text-content-inverse bg-accent-brand text-text-small hover:text-content-primary p-[12px] rounded-lg transition-colors border border-border-primary">Salvar</button>
       </div>
-      <div class="flex flex-col gap-[16px]">
-        <input type="hidden" name="id" id="edit_id">
-        <div class="flex flex-col gap-[4px]">
-          <label for="name" class="text-content-primary text-text-small">Nome</label>
-          <input type="text" placeholder="Nome" id="edit_name"
-            class="w-full bg-background-secondary placeholder:text-content-placeholder p-[12px] border border-primary rounded-lg focus:border-accent-brand outline-none transition-all">
-        </div>
-        <div class="flex flex-col gap-[4px]">
-          <label for="email" class="text-content-primary text-text-small">E-mail</label>
-          <input type="text" placeholder="E-mail" id="edit_email"
-            class="w-full bg-background-secondary placeholder:text-content-placeholder p-[12px] border border-primary rounded-lg focus:border-accent-brand outline-none transition-all">
-        </div>
-        <div class="flex flex-col gap-[4px]">
-          <label for="phone" class="text-content-primary text-text-small">Telefone</label>
-          <input type="text" placeholder="Telefone" id="edit_phone"
-            class="w-full mb-[20px] bg-background-secondary placeholder:text-content-placeholder p-[12px] border border-primary rounded-lg focus:border-accent-brand outline-none transition-all">
-        </div>
-      </div>
-    </div>
-    <div class="border-t border-border-primary"></div>
-    <div class="flex justify-end pt-[12px] mr-[0px] gap-[12px]">
-      <button
-        class="text-content-primary bg-background-tertiary text-text-small hover:text-content-primary p-[12px] rounded-lg transition-colors border border-border-primary">Cancelar</button>
-      <button
-        class="text-content-inverse bg-accent-brand text-text-small hover:text-content-primary p-[12px] rounded-lg transition-colors border border-border-primary">Salvar</button>
-    </div>
+    </form>
   </div>
   <form method="dialog" class="modal-backdrop fixed inset-0 z-0 backdrop-blur-sm bg-black/30">
     <button class="cursor-default w-full h-full">close</button>
