@@ -8,14 +8,22 @@ class Encryption
 {
     private const CIPHER = 'AES-256-CBC';
 
-    private const KEY = 'super_secret_key_change_me_please!!';
+    private static function getKey(): string
+    {
+        $key = config('app.security.encryption_key');
+        if (! $key) {
+            throw new \RuntimeException('Encryption key not set in config/env');
+        }
+
+        return $key;
+    }
 
     public static function encrypt(string $data): string
     {
         $ivLen = openssl_cipher_iv_length(self::CIPHER);
         $iv = openssl_random_pseudo_bytes($ivLen);
-        $encrypted = openssl_encrypt($data, self::CIPHER, self::KEY, 0, $iv);
-        $mac = hash_hmac('sha256', $encrypted, self::KEY);
+        $encrypted = openssl_encrypt($data, self::CIPHER, self::getKey(), 0, $iv);
+        $mac = hash_hmac('sha256', $encrypted, self::getKey());
 
         return base64_encode($iv.$mac.$encrypted);
     }
@@ -31,10 +39,10 @@ class Encryption
         $iv = substr($binary, 0, $ivLen);
         $mac = substr($binary, $ivLen, $macLen);
         $encrypted = substr($binary, $ivLen + $macLen);
-        if (! hash_equals($mac, hash_hmac('sha256', $encrypted, self::KEY))) {
+        if (! hash_equals($mac, hash_hmac('sha256', $encrypted, self::getKey()))) {
             return null;
         }
-        $decrypted = openssl_decrypt($encrypted, self::CIPHER, self::KEY, 0, $iv);
+        $decrypted = openssl_decrypt($encrypted, self::CIPHER, self::getKey(), 0, $iv);
 
         return $decrypted === false ? null : $decrypted;
     }

@@ -16,7 +16,7 @@ class Database
     private function __construct()
     {
         try {
-            $dbPath = __DIR__.'/../database/database.sqlite';
+            $dbPath = config('app.database.path');
             if (! file_exists($dbPath)) {
                 touch($dbPath);
             }

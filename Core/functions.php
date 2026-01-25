@@ -27,6 +27,45 @@ if (! function_exists('check')) {
         return Session::has('user');
     }
 }
+if (! function_exists('env')) {
+    function env(string $key, mixed $default = null): mixed
+    {
+        return $_ENV[$key] ?? $default;
+    }
+}
+
+if (! function_exists('base_path')) {
+    function base_path(string $path = ''): string
+    {
+        return __DIR__.'/../'.$path;
+    }
+}
+
+if (! function_exists('config')) {
+    function config(string $key, mixed $default = null): mixed
+    {
+        $keys = explode('.', $key);
+        $file = array_shift($keys);
+
+        $path = base_path("config/{$file}.php");
+
+        if (! file_exists($path)) {
+            return $default;
+        }
+
+        $config = require $path;
+
+        foreach ($keys as $segment) {
+            if (! isset($config[$segment])) {
+                return $default;
+            }
+            $config = $config[$segment];
+        }
+
+        return $config;
+    }
+}
+
 if (! function_exists('redirect')) {
     function redirect(string $url): void
     {
