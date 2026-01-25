@@ -1,4 +1,5 @@
 <?php
+Core\Session::init();
 $uri = $_SERVER['REQUEST_URI'] ?? '/';
 function getLinkClasses($rota, $uriAtual): string
 {
@@ -124,13 +125,19 @@ function getLinkClasses($rota, $uriAtual): string
         </span>
       </a>
     </nav>
-    <div class="flex flex-col justify-center">
+    <div class="flex flex-col justify-center mt-[60px] w-full text-center">
       <span class="text-content-muted text-label-small">Logado como:</span>
-      <span class="text-content-body text-label-small font-bold">Francis88@hotmail.com</span>
+      <span class="text-content-body text-label-small font-bold truncate max-w-[90px] block mx-auto" title="<?= user()['email'] ?? '' ?>"><?= user()['email'] ?? '' ?></span>
     </div>
   </aside>
   <main class="flex-1 w-full max-w-[calc(100vw-250px)] overflow-y-auto bg-background-primary mt-[96px] min-h-[calc(100vh-140px)]">
-   <div class="p-[40px] bg-background-secondary rounded-xl h-[calc(100vh-150px)]"> <?= $content ?></div>
+    <?php if ($msg = flash('success')) { ?>
+      <div class="bg-accent-brand/10 border border-accent-brand/20 text-accent-brand px-4 py-3 rounded-xl mb-5 flex items-center gap-2 animate-fade-in-down">
+        <span class="material-symbols-rounded text-sm">check_circle</span>
+        <span class="font-bold text-sm"><?= $msg ?></span>
+      </div>
+    <?php } ?>
+      <div class="p-[40px] bg-background-secondary rounded-xl h-[calc(100vh-150px)]"> <?= $content ?></div>
   </main>
 </body>
 

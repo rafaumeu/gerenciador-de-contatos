@@ -20,6 +20,11 @@ class Route
 
     public function dispatch(string $uri, string $method): void
     {
+        if (! isset($this->routes[$method][$uri])) {
+            http_response_code(404);
+            echo "404 - Metodo {$method} nao permitido ou sem rotas definidas";
+            exit;
+        }
         if (array_key_exists($uri, $this->routes[$method])) {
             $action = $this->routes[$method][$uri];
             [$controllerClass,$methodName] = explode('@', $action);
@@ -27,7 +32,8 @@ class Route
             $controller->$methodName();
         } else {
             http_response_code(404);
-            echo '404 - Rota não encontrada!';
+            echo '404 - Rota nao encontrada';
+            exit;
         }
     }
 }
