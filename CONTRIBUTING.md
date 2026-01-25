@@ -1,64 +1,35 @@
-# Contributing to Gerenciador de Contatos
+# Contributing to Contact Manager
 
-## Atomic Commits & Quality Standards
+First off, thanks for taking the time to contribute! ❤️
 
-We follow a strict **Atomic Commit** philosophy. Each commit should represent a single logical change that is complete and verifiable.
+All types of contributions are encouraged and valued. See the [Table of Contents](#table-of-contents) for different ways to help and details about how this project handles them. Please make sure to read the relevant section before making your contribution. It will make it a lot easier for us maintainers and smooth out the experience for all involved. The community looks forward to your contributions.
 
-### Commit Message Convention
+## Code of Conduct
 
-We use [Conventional Commits](https://www.conventionalcommits.org/):
+This project and everyone participating in it is governed by the [Code of Conduct](CODE_OF_CONDUCT.md).
+By participating, you are expected to uphold this code.
 
-```
-type(scope): subject
+## How Can I Contribute?
 
-- detailed description point 1
-- detailed description point 2
-```
+### Reporting Bugs
 
-#### Types
-- `feat`: A new feature
-- `fix`: A bug fix
-- `docs`: Documentation only changes
-- `style`: Changes that do not affect the meaning of the code (white-space, formatting, etc)
-- `refactor`: A code change that neither fixes a bug nor adds a feature
-- `perf`: A code change that improves performance
-- `test`: Adding missing tests or correcting existing tests
-- `chore`: Changes to the build process or auxiliary tools and libraries such as documentation generation
+- **Ensure the bug was not already reported** by searching on GitHub under [Issues](https://github.com/rafaumeu/gerenciador-de-contatos/issues).
+- If you're unable to find an open issue addressing the problem, open a new one. Be sure to include a **title and clear description**, as much relevant information as possible, and a **code sample** or an **executable test case** demonstrating the expected behavior that is not occurring.
 
-### Examples from our History
+### Pull Requests
 
-**Feature:**
-```
-feat(auth): implement login with google
+- Fill in the required template
+- Do not include issue numbers in the PR title
+- Include screenshots and animated GIFs in your pull request whenever possible.
+- Follow the PHP PSR-12 coding standard.
+- Document new code based on the Documentation Styleguide
+- End all files with a newline
 
-- Add Google OAuth client dependency
-- Create GoogleLoginController
-- Update login view with "Sign in with Google" button
-```
+## Styleguides
 
-**Refactor:**
-```
-refactor(core): centralized database connection
+### Git Commit Messages
 
-- Move PDO instantiation to Database class factory
-- Remove direct localized connections in controllers
-- Update config.php with centralized credentials
-```
-
-### Pull Request Process
-
-1. Ensure your code is formatted (`./vendor/bin/pint`).
-2. Ensure you have no "Working In Progress" code commits.
-3. Squash trivial "fix typo" commits before merging.
-
-### Workflow
-
-We strictly follow the **GitHub Flow**.
-
-1.  **Fork** the repo on GitHub (if external) or Clone (if internal).
-2.  **Create a branch** for your work.
-    *   `git checkout -b feature/name-of-your-feature`
-    *   `git checkout -b fix/name-of-the-fix`
-3.  **Commit** changes using the conventions above.
-4.  **Push** your work.
-5.  Submit a **Pull Request**.
+- Use the present tense ("Add feature" not "Added feature")
+- Use the imperative mood ("Move cursor to..." not "Moves cursor to...")
+- Limit the first line to 72 characters or less
+- Reference issues and pull requests liberally after the first line

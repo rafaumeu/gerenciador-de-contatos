@@ -1,7 +1,7 @@
 # 📇 Contact Manager
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge&logoScale=20)
-[![Fix Code Style](https://img.shields.io/github/actions/workflow/status/rafaumeu/gerenciador-de-contatos/lint.yml?branch=main&label=Build&logo=github&style=for-the-badge&logoScale=20)](https://github.com/rafaumeu/gerenciador-de-contatos/actions/workflows/lint.yml)
+[![Bob](https://github.com/rafaumeu/gerenciador-de-contatos/actions/workflows/lint.yml/badge.svg)](https://github.com/rafaumeu/gerenciador-de-contatos/actions/workflows/lint.yml)
 ![PHP](https://img.shields.io/badge/php-8.2+-777BB4.svg?style=for-the-badge&logo=php&logoColor=white&logoScale=20)
 ![Composer](https://img.shields.io/badge/Composer-885630?style=for-the-badge&logo=composer&logoColor=white)
 
