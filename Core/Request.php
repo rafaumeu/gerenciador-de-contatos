@@ -17,4 +17,9 @@ class Request
     {
         return $_SERVER['REQUEST_METHOD'];
     }
+
+    public static function all(): array
+    {
+        return $_REQUEST;
+    }
 }

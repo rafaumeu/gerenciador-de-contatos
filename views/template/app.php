@@ -112,18 +112,21 @@ function getLinkClasses($rota, $uriAtual): string
           account_circle
         </span>
       </a>
+      
       <a href="/contatos"
         class="<?= getLinkClasses('/contatos', $uri) ?>">
         <span class="material-symbols-rounded text-2xl">
           settings
         </span>
       </a>
-      <a href="/logout"
-        class="group relative flex items-center bg-background-secondary justify-center p-3 rounded-xl text-content-muted">
-        <span class="material-symbols-rounded text-2xl">
-          logout
-        </span>
-      </a>
+      <form action="/logout" method="post">
+        <button type="submit"
+          class="group relative flex items-center bg-background-secondary justify-center p-3 rounded-xl text-content-muted">
+          <span class="material-symbols-rounded text-2xl">
+            logout
+          </span>
+        </button>
+      </form>
     </nav>
     <div class="flex flex-col justify-center mt-[60px] w-full text-center">
       <span class="text-content-muted text-label-small">Logado como:</span>
@@ -132,7 +135,7 @@ function getLinkClasses($rota, $uriAtual): string
   </aside>
   <main class="flex-1 w-full max-w-[calc(100vw-250px)] overflow-y-auto bg-background-primary mt-[96px] min-h-[calc(100vh-140px)]">
     <?php if ($msg = flash('success')) { ?>
-      <div class="bg-accent-brand/10 border border-accent-brand/20 text-accent-brand px-4 py-3 rounded-xl mb-5 flex items-center gap-2 animate-fade-in-down">
+      <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)"  x-transition.duration.500ms class="bg-accent-brand/10 border border-accent-brand/20 text-accent-brand px-4 py-3 rounded-xl mb-5 flex items-center gap-2 animate-fade-in-down">
         <span class="material-symbols-rounded text-sm">check_circle</span>
         <span class="font-bold text-sm"><?= $msg ?></span>
       </div>

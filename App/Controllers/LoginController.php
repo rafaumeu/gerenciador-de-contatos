@@ -51,4 +51,10 @@ class LoginController extends Controller
         flash('old', ['email' => $email]);
         redirect('/login');
     }
+
+    public function logout(): void
+    {
+        Session::destroy();
+        redirect('/login');
+    }
 }

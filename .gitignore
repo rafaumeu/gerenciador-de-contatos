@@ -20,6 +20,7 @@ Thumbs.db
 # Application specific
 /storage/
 .phpunit.cache/
+/public/uploads/
 
 .agent*
 implementation_plan.md
