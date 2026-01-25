@@ -11,7 +11,7 @@
         </button>
       </form>
     </div>
-    <form action="/contato/update" method="POST" id="edit_contact_form" enctype="multipart/form-data">
+    <form action="/contatos/update" method="POST" id="edit_contact_form" enctype="multipart/form-data">
       <div class="flex flex-col p-[20px]">
         <div class="p-[20px] flex flex-col items-center justify-center">
           <div

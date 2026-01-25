@@ -58,6 +58,12 @@
     ```bash
     php database/migration.php
     php -S localhost:8000 -t public
+    ```
+
+6.  **Seed Database (Optional)**:
+    Populate with test data (Admin + 5 encrypted contacts):
+    ```bash
+    docker compose exec app php database/seeder.php
     ```    git clone https://github.com/rafaumeu/gerenciador-de-contatos.git
     cd gerenciador-de-contatos
     ```

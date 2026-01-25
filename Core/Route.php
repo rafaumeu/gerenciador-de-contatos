@@ -49,7 +49,7 @@ class Route
     {
         if (! isset($this->routes[$method][$uri])) {
             http_response_code(404);
-            echo "404 - Metodo {$method} nao permitido ou sem rotas definidas";
+            require __DIR__.'/../views/404.view.php';
             exit;
         }
         $route = $this->routes[$method][$uri];

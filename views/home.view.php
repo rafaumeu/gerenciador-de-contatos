@@ -12,7 +12,7 @@
       </form>
     </div>
     <div class="flex gap-3">
-      <button onclick="openPasswordContactModal()"
+      <button onclick="openAddContactModal()"
         class="flex items-center gap-[4px] p-[12px] bg-background-tertiary text-content-primary font-bold rounded-lg text-sm hover:brightness-110 transition-all">
         <span class="material-symbols-rounded text-lg">add</span>
         Adicionar contato
@@ -110,7 +110,7 @@
                           <span class="material-symbols-rounded text-icon">delete</span>
                         </button>
                         <?php if ($unlocked ?? false) { ?>
-                        <button onclick="document.getElementById('password_contact_modal').showModal()"
+                        <button onclick="lockData()"
                           class="p-2 hover:bg-accent-brand/20 rounded-lg text-content-primary hover:text-accent-brand transition-colors">
                           <span class="material-symbols-rounded text-icon">lock</span>
                         </button>
@@ -141,6 +141,9 @@
 </div>
 
 <script>
+  function openAddContactModal() {
+    document.getElementById('add_contact_modal').showModal();
+  }
   function openModal(contact) {
     document.getElementById('edit_contact_modal').showModal();
     document.getElementById('edit_id').value = contact.id;

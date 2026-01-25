@@ -60,9 +60,15 @@ class ContactController extends Controller
         $contact = new Contact;
         $updateData = [
             'name' => $data['name'],
-            'email' => Encryption::encrypt($data['email']),
-            'phone' => Encryption::encrypt($data['phone']),
         ];
+
+        // Only update sensitive fields if they were sent (unlocked mode)
+        if (! empty($data['email'])) {
+            $updateData['email'] = Encryption::encrypt($data['email']);
+        }
+        if (! empty($data['phone'])) {
+            $updateData['phone'] = Encryption::encrypt($data['phone']);
+        }
         if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
             $uploadDir = __DIR__.'/../../public/uploads';
             if (! is_dir($uploadDir)) {
