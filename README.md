@@ -32,6 +32,36 @@
     cd gerenciador-de-contatos
     ```
 
+2.  **Environment Setup**:
+    Copy the example environment file and generate your encryption key:
+    ```bash
+    cp .env.example .env
+    # Generate a secure key
+    php -r "echo base64_encode(openssl_random_pseudo_bytes(32));"
+    # Paste the key into your .env file at ENCRYPTION_KEY=...
+    ```
+
+3.  Install dependencies:
+    ```bash
+    composer install
+    ```
+
+4.  **Docker (Recommended)**:
+    Start the application containers:
+    ```bash
+    docker compose up -d --build
+    ```
+    Access at http://localhost:8000.
+
+5.  **Manual Setup (Alternative)**:
+    Run the migrations and start the server:
+    ```bash
+    php database/migration.php
+    php -S localhost:8000 -t public
+    ```    git clone https://github.com/rafaumeu/gerenciador-de-contatos.git
+    cd gerenciador-de-contatos
+    ```
+
 2.  Install dependencies:
     ```bash
     composer install
