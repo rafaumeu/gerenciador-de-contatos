@@ -1,2 +1,11 @@
+# This file defines owner(s) for code in this repository.
+# These owners will be automatically requested for review when new PRs are opened.
+
 # Default owner for everything
-* @rafaumeu
+*       @rafaumeu
+
+# Core Framework
+Core/   @rafaumeu
+
+# Security
+SECURITY.md @rafaumeu

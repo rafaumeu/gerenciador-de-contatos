@@ -53,7 +53,7 @@ class RegisterController extends Controller
                 $score += 30;
             }
             if ($score < 50) {
-                $errors['password'] = 'Senha muito fraca! Adicione letras maiúsculas, números ou caracteres especiais.';
+                $errors['password'] = 'Senha muito fraca! A senha deve conter minimo de 8 caracteres, uma letra maiúscula, um número e um caractere especial';
             }
         }
         if ($password !== $confirm) {
