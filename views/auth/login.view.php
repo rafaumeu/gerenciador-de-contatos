@@ -11,9 +11,12 @@ $old = Core\Session::getFlash('old') ?? [];
 <div class="flex flex-col gap-[20px] text-center lg:text-left">
   <h2 class="text-heading font-bold text-content-primary">Acessar conta</h2>
 </div>
-<?php if ($success) { ?>
-  <div class="text-center text-accent-brand font-bold text-text-small mb-[20px]"><?= $success ?></div>
-<?php } ?>
+<?php if ($msg = flash('success')) { ?>
+      <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)"  x-transition.duration.500ms class="bg-accent-brand/10 border border-accent-brand/20 text-accent-brand px-4 py-3 rounded-xl mb-5 flex items-center gap-2 animate-fade-in-down">
+        <span class="material-symbols-rounded text-sm">check_circle</span>
+        <span class="font-bold text-sm"><?= $msg ?></span>
+      </div>
+    <?php } ?>
 <form action="/login" method="POST" class="flex flex-col gap-[20px] w-full">
   <div class="flex flex-col gap-[4px]">
     <label for="email" class="text-label-medium text-content-body font-medium ml-1">E-mail</label>

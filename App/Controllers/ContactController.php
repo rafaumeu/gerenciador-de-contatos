@@ -95,6 +95,10 @@ class ContactController extends Controller
         if (! $userSession) {
             redirect('/login');
         }
+        if (empty($password)) {
+            flash('errors', ['password' => 'A senha é obrigatória!']);
+            redirect('/');
+        }
         $userModel = new User;
         $user = $userModel->findByEmail($userSession['email']);
         if ($user && password_verify($password, $user['password'])) {
@@ -102,7 +106,7 @@ class ContactController extends Controller
             flash('success', 'Senha correta! Dados liberados');
             redirect('/');
         }
-        flash('error', 'Senha incorreta! Dados bloqueados');
+        flash('errors', ['password' => 'Senha incorreta!']);
         redirect('/');
     }
 

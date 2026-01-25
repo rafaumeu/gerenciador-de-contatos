@@ -1,3 +1,4 @@
+<?php $errors = flash('errors') ?>
 <?php include __DIR__.'/partials/modal-add-contact.php'; ?>
 <?php include __DIR__.'/partials/modal-edit-contact.php'; ?>
 <?php include __DIR__.'/partials/modal-password-contact.php'; ?>
@@ -200,4 +201,10 @@
     document.body.appendChild(form);
     form.submit();
   }
+  <?php if (isset($errors['password'])) { ?>
+    document.addEventListener('DOMContentLoaded', function() {
+     openPasswordContactModal();
+    });
+  <?php } ?>
+
 </script>

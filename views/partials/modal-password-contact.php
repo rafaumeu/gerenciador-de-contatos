@@ -19,21 +19,21 @@
             <label for="name" class="text-content-primary text-text-small">Senha</label>
             <div class="relative">
               <input name="password" :type="showPassword ? 'text' : 'password'" placeholder="Digite sua senha"
-                class="w-full bg-background-secondary placeholder:text-content-placeholder p-[12px] border border-primary rounded-lg focus:border-accent-brand outline-none transition-all">
+                class="w-full bg-background-secondary placeholder:text-content-placeholder p-[12px] border <?= isset($errors['password']) ? 'border-accent-red' : 'border-primary' ?> rounded-lg focus:border-accent-brand outline-none transition-all">
               <button type="button" @click="showPassword = !showPassword"
                 class="absolute right-1 top-1/2 -translate-y-1/2 text-content-muted hover:text-content-primary p-2 rounded-lg transition-colors">
                 <span class="material-symbols-rounded" x-text="showPassword ? 'visibility' : 'visibility_off'"></span>
               </button>
             </div>
-            <?php if (isset($errors['password'])) { ?>
-              <div class="flex item-center gap-1 mt-[-16px]">
-                <span class="material-symbols-rounded text-text-small text-accent-red">cancel</span>
-                <span class="flex items-center text-text-medium text-content-body">
-                  <?php echo $errors['password']; ?>
-                </span>
-              </div>
-            <?php } ?>
           </div>
+          <?php if (isset($errors['password'])) { ?>
+            <div class="flex item-center gap-1 mt-[-16px]">
+              <span class="material-symbols-rounded text-text-small text-accent-red">cancel</span>
+              <span class="flex items-center text-text-medium text-content-body">
+                <?php echo $errors['password']; ?>
+              </span>
+            </div>
+          <?php } ?>
         </div>
       </form>
     </div>
