@@ -45,15 +45,15 @@ $old = Core\Session::getFlash('old') ?? [];
           <span class="material-symbols-rounded" x-text="show ? 'visibility' : 'visibility_off'"></span>
         </button>
       </div>
-      <?php if (isset($errors['password'])) { ?>
-          <div class="flex item-center gap-1 mt-[-16px]">
-            <span class="material-symbols-rounded text-text-small text-accent-red">cancel</span>
-            <span class="flex items-center text-text-medium text-content-body">
-              <?php echo $errors['password']; ?>
-            </span>
-          </div>
-        <?php } ?>
     </div>
+    <?php if (isset($errors['password'])) { ?>
+        <div class="flex item-center gap-1 mt-[-16px]">
+          <span class="material-symbols-rounded text-text-small text-accent-red">cancel</span>
+          <span class="flex items-center text-text-medium text-content-body">
+            <?php echo $errors['password']; ?>
+          </span>
+        </div>
+      <?php } ?>
     <button type="submit"
       class="self-end w-auto flex justify-center items-center gap-1 bg-accent-brand text-background-primary font-bold rounded-xl p-3 mt-2 hover:brightness-110 transition-all shadow-[0_0_15px_rgba(196,241,32,0.3)]">Entrar</button>
 

@@ -2,6 +2,12 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
+// Load Environment Variables
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/../');
+$dotenv->safeLoad();
+
+require __DIR__.'/../Core/functions.php';
+
 use Core\Database;
 
 try {

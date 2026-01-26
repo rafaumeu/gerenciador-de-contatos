@@ -10,7 +10,9 @@ return [
     ],
 
     'database' => [
-        'path' => env('DB_PATH', base_path('database/database.sqlite')),
+        'path' => str_starts_with(env('DB_PATH', ''), '/')
+            ? env('DB_PATH')
+            : base_path(env('DB_PATH', 'database/database.sqlite')),
     ],
 
     'security' => [
